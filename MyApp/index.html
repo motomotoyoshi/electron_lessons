@@ -20,5 +20,20 @@
 </head>
 <body>
     <p id="quote">Just do it!</p>
+    <script>
+        'use strict';
+
+        const quote = document.getElementById('quote');
+        const quotes = [
+            'Just do it!',
+            'Let it be.',
+            'Sushi tabetai!',
+            'Kabuto mushi',
+            'TRF',
+        ];
+        window.addEventListener('click', function() {
+            quote.innerHTML = quotes[Math.floor(Math.random() * quotes.length)];
+        })
+    </script>
 </body>
 </html>
