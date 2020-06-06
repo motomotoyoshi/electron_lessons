@@ -10,6 +10,7 @@ const Menu = electron.Menu;
 const dialog = electron.dialog;
 
 let mainWindow;
+let settingsWindow;
 
 let menuTemplate = [{
   label: 'MyApp',
@@ -33,9 +34,19 @@ function showAboutDialog() {
   });
 }
 
+function showSettingsWindow() {
+  settingsWindow = new BrowserWindow({ width: 800, height: 400 });
+  settingsWindow.loadURL(`file://${__dirname}/settings.html`);
+  settingsWindow.webContents.openDevTools();
+  settingsWindow.show();
+  settingsWindow.on("closed", function () {
+    settingsWindow = null;
+  });
+}
+
 function createMainWindow() {
   Menu.setApplicationMenu(menu);
-  mainWindow = new BrowserWindow({ width: 600, height: 400 });
+  mainWindow = new BrowserWindow({ width: 800, height: 400 });
   mainWindow.loadURL(`file://${__dirname}/index.html`);
   mainWindow.webContents.openDevTools();
   mainWindow.on("closed", function () {
