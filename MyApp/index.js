@@ -7,6 +7,7 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
+const dialog = electron.dialog;
 
 let mainWindow;
 
@@ -22,6 +23,15 @@ let menuTemplate = [{
 }];
 
 let menu = Menu.buildFromTemplate(menuTemplate);
+
+function showAboutDialog() {
+  dialog.showMessageBox({
+    type: 'info',
+    buttons: ['ok'],
+    message: 'About This App',
+    detail: 'ok farm'
+  });
+}
 
 function createMainWindow() {
   Menu.setApplicationMenu(menu);
