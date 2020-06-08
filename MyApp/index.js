@@ -8,6 +8,7 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 const dialog = electron.dialog;
+const ipcMain = electron.ipcMain;
 
 let mainWindow;
 let settingsWindow;
@@ -19,11 +20,15 @@ let menuTemplate = [{
     { type: 'separator'},
     { label: 'Settings', accelerator: 'CmdOrCtrl+,', click: function () { showSettingsWindow(); }},
     { type: 'separator' },
-    { label: 'Quit', accelerator: 'CmdOrCtrl+Shift+Q', click: function () { app.quit(); } },
+    { label: 'Quit', accelerator: 'CmdOrCtrl+Q', click: function () { app.quit(); } },
   ]
 }];
 
 let menu = Menu.buildFromTemplate(menuTemplate);
+
+ipcMain.on('settings_changed', function(event, color) {
+  mainWindow.webContents.send('set_bgcolor', color);
+});
 
 function showAboutDialog() {
   dialog.showMessageBox({
@@ -35,7 +40,12 @@ function showAboutDialog() {
 }
 
 function showSettingsWindow() {
-  settingsWindow = new BrowserWindow({ width: 800, height: 400 });
+  settingsWindow = new BrowserWindow({
+    webPreferences: {
+      nodeIntegration: true
+    },
+    width: 600, height: 300
+  });
   settingsWindow.loadURL(`file://${__dirname}/settings.html`);
   settingsWindow.webContents.openDevTools();
   settingsWindow.show();
@@ -46,7 +56,12 @@ function showSettingsWindow() {
 
 function createMainWindow() {
   Menu.setApplicationMenu(menu);
-  mainWindow = new BrowserWindow({ width: 800, height: 400 });
+  mainWindow = new BrowserWindow({
+    webPreferences: {
+      nodeIntegration: true
+    },
+    width: 800, height: 400
+  });
   mainWindow.loadURL(`file://${__dirname}/index.html`);
   mainWindow.webContents.openDevTools();
   mainWindow.on("closed", function () {
