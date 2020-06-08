@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+            padding: 10px;
+            background: #eee;
+        }
+        h1 {
+            font-size: 16px;
+            margin: 0;
+            padding: 0 0 10px 0;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        ul > li {
+            font-size: 14px;
+            padding: 3px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Background Color</h1>
+    <ul>
+        <li>
+            <label><input type="radio" name="colors" value="skyblue">Skyblue</label>
+        </li>
+        <li>
+            <label><input type="radio" name="colors" value="tomato">tomato</label>
+        </li>
+        <li>
+            <label><input type="radio" name="colors" value="slategray">Slategray</label>
+        </li>
+    </ul>
+    <script>
+        'use strict';
+
+        const ipcRenderer = window.ipcRenderer;
+
+        let colors = document.getElementsByName('colors');
+        for (let i = 0; i < colors.length; i++) {
+            colors[i].addEventListener('change', function() {
+                let color = this.value;
+                // console.log(color);
+                ipcRenderer.send('settings_changed', color);
+            })
+        }
+    </script>
+</body>
+</html>

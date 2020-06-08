@@ -42,7 +42,8 @@ function showAboutDialog() {
 function showSettingsWindow() {
   settingsWindow = new BrowserWindow({
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: false,
+      preload: `${__dirname}/preload.js`
     },
     width: 600, height: 300
   });
@@ -58,7 +59,8 @@ function createMainWindow() {
   Menu.setApplicationMenu(menu);
   mainWindow = new BrowserWindow({
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: false,
+      preload: `${__dirname}/preload.js`
     },
     width: 800, height: 400
   });
