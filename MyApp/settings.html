@@ -43,9 +43,13 @@
         'use strict';
 
         const ipcRenderer = window.ipcRenderer;
+        let currentColor = ipcRenderer.sendSync('get_bgcolor');
 
         let colors = document.getElementsByName('colors');
         for (let i = 0; i < colors.length; i++) {
+            if (currentColor === colors[i].value) {
+                colors[i].checked = true;
+            }
             colors[i].addEventListener('change', function() {
                 let color = this.value;
                 // console.log(color);

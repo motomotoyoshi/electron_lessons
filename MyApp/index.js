@@ -12,6 +12,7 @@ const ipcMain = electron.ipcMain;
 
 let mainWindow;
 let settingsWindow;
+let backgroundColor = 'skyblue';
 
 let menuTemplate = [{
   label: 'MyApp',
@@ -28,6 +29,10 @@ let menu = Menu.buildFromTemplate(menuTemplate);
 
 ipcMain.on('settings_changed', function(event, color) {
   mainWindow.webContents.send('set_bgcolor', color);
+});
+
+ipcMain.on('get_bgcolor', function(event) {
+  event.returnValue = backgroundColor;
 });
 
 function showAboutDialog() {
