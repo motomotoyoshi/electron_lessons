@@ -31,6 +31,10 @@ ipcMain.on('settings_changed', function(event, color) {
   mainWindow.webContents.send('set_bgcolor', color);
 });
 
+ipcMain.on('bgcolor_changed', function(event, color) {
+  backgroundColor = color;
+});
+
 ipcMain.on('get_bgcolor', function(event) {
   event.returnValue = backgroundColor;
 });
