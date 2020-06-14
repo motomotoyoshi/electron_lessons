@@ -27,6 +27,7 @@
         const remote = window.remote;
         const Menu = remote.Menu;
         const MenuItem = remote.MenuItem;
+        const shell = remote.shell;
 
         let color = localStorage.getItem('color')?
             localStorage.getItem('color'): 'skyblue';
@@ -82,7 +83,19 @@
 
         ipcRenderer.on('set_bgcolor', function(event, color) {
             setBackgroundColor(color);
-        })
+        });
+
+        setTimeout(() => {
+            let notification = new Notification(
+                'Quote!',
+                {
+                    body: 'Visit our website!'
+                }
+            );
+            notification.onclick = () => {
+                shell.openExternal('https://example.com');
+            }
+        }, 3000);
     </script>
 </body>
 </html>
