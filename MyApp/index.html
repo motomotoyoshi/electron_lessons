@@ -28,6 +28,10 @@
         const Menu = remote.Menu;
         const MenuItem = remote.MenuItem;
 
+        let color = localStorage.getItem('color')?
+            localStorage.getItem('color'): 'skyblue';
+        setBackgroundColor(color);
+
         let menu = new Menu();
         menu.append(new MenuItem(
             {
@@ -60,7 +64,8 @@
 
         function setBackgroundColor(color) {
             document.body.style.backgroundColor = color;
-            ipcRenderer.send('bgcolor_changed', color);
+            localStorage.setItem('color', color);
+            // ipcRenderer.send('bgcolor_changed', color);
         }
 
         const quote = document.getElementById('quote');

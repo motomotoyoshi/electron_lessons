@@ -12,7 +12,7 @@ const ipcMain = electron.ipcMain;
 
 let mainWindow;
 let settingsWindow;
-let backgroundColor = 'skyblue';
+// let backgroundColor = 'skyblue';
 
 let menuTemplate = [{
   label: 'MyApp',
@@ -31,13 +31,13 @@ ipcMain.on('settings_changed', function(event, color) {
   mainWindow.webContents.send('set_bgcolor', color);
 });
 
-ipcMain.on('bgcolor_changed', function(event, color) {
-  backgroundColor = color;
-});
+// ipcMain.on('bgcolor_changed', function(event, color) {
+//   backgroundColor = color;
+// });
 
-ipcMain.on('get_bgcolor', function(event) {
-  event.returnValue = backgroundColor;
-});
+// ipcMain.on('get_bgcolor', function(event) {
+//   event.returnValue = backgroundColor;
+// });
 
 function showAboutDialog() {
   dialog.showMessageBox({

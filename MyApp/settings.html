@@ -43,7 +43,8 @@
         'use strict';
 
         const ipcRenderer = window.ipcRenderer;
-        let currentColor = ipcRenderer.sendSync('get_bgcolor');
+        // let currentColor = ipcRenderer.sendSync('get_bgcolor');
+        let currentColor = localStorage.getItem('color');
 
         let colors = document.getElementsByName('colors');
         for (let i = 0; i < colors.length; i++) {
