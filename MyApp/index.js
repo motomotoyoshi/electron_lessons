@@ -57,7 +57,7 @@ function showSettingsWindow() {
     width: 600, height: 300
   });
   settingsWindow.loadURL(`file://${__dirname}/settings.html`);
-  settingsWindow.webContents.openDevTools();
+  // settingsWindow.webContents.openDevTools();
   settingsWindow.show();
   settingsWindow.on("closed", function () {
     settingsWindow = null;
@@ -74,7 +74,7 @@ function createMainWindow() {
     width: 800, height: 400
   });
   mainWindow.loadURL(`file://${__dirname}/index.html`);
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
   mainWindow.on("closed", function () {
     mainWindow = null;
   });
